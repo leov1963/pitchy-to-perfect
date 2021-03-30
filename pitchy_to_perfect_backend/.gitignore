@@ -8,4 +8,7 @@ media
 *.py[cod] 
 *$py.class 
 
+.ipynb_checkpoints
+keys.py
+
 .env

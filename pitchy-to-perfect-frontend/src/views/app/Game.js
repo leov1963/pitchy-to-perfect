@@ -20,7 +20,6 @@ const Game = () => {
             .then(res => res.json())
             .then(data => {
             setUserEmail(data.email);
-            console.log("test********************************")
             setLoading(false);
             });
         }

@@ -9,7 +9,7 @@ const Signup = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
-        window.location.replace('http://localhost:3000/dashboard');
+        window.location.replace('http://localhost:3000/game');
         } else {
         setLoading(false);
         }
@@ -36,7 +36,7 @@ const Signup = () => {
             if (data.key) {
             localStorage.clear();
             localStorage.setItem('token', data.key);
-            window.location.replace('http://localhost:3000/dashboard');
+            window.location.replace('http://localhost:3000/game');
             } else {
             setEmail('');
             setPassword1('');

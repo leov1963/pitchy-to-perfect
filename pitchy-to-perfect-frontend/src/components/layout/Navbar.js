@@ -11,8 +11,8 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav>
-        <h1>Django React Auth</h1>
+        <nav className="nav">
+        <h1>P2P</h1>
         <ul>
             {isAuth === true ? (
             <Fragment>

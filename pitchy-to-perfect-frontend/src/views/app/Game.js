@@ -9,9 +9,10 @@ const Game = () => {
     const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [isActive, setIsActive] = useState(false);
-    const [randomNote, setRandomNote] = useState("")
-    const [wrongRandomNote, setWrongRandomNote] = useState("")
+    const [randomNote, setRandomNote] = useState("");
+    const [wrongRandomNote, setWrongRandomNote] = useState("");
     const [isAnswerLeft, setIsAnswerLeft] = useState(false);
+    let [currentScore, setCurrentScore] = useState(0);
 
     const synth = new Tone.Synth().toDestination();
     
@@ -84,9 +85,11 @@ const Game = () => {
             console.log("Correct Answer!")
             PlayNote()
             newRound()
+            setCurrentScore(currentScore += 1)
         } else {
             console.log("Wrong Answer!")
             newRound()
+            setCurrentScore(currentScore = 0)
         }   
     }
 
@@ -96,9 +99,11 @@ const Game = () => {
             console.log("Correct Answer!")
             PlayNote()
             newRound()
+            setCurrentScore(currentScore += 1)
         } else {
             console.log("Wrong Answer!")
             newRound()
+            setCurrentScore(currentScore = 0)
         }   
     }
 
@@ -110,10 +115,11 @@ const Game = () => {
             <div>
                 {/* <PlayNoteButton /> */}
                 <button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</button>
-                <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
-                    <button onClick={PlayNote}>🔊</button>
-                    play note
-                </div>
+            </div>
+            <div>current score: {currentScore}</div>
+            <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
+                <button onClick={PlayNote}>🔊</button>
+                play note
             </div>
             <br />
             <div>

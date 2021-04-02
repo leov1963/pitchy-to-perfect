@@ -1,6 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import * as Tone from 'tone'
+// import { Button, Icon } from 'semantic-ui-react'
+// import PlayNoteButton from '../ui/PlayNoteButton'
 import './game.css'
+
+
+
 
 const Game = () => {
     const [userEmail, setUserEmail] = useState('');
@@ -77,6 +82,7 @@ const Game = () => {
         console.log("note choice check")
         if (isAnswerLeft == true) {
             console.log("Correct Answer!")
+            PlayNote()
         } else {
             console.log("Wrong Answer!")
         }   
@@ -87,6 +93,7 @@ const Game = () => {
         console.log("note choice check")
         if (isAnswerLeft == false) {
             console.log("Correct Answer!")
+            PlayNote()
         } else {
             console.log("Wrong Answer!")
         }   
@@ -98,6 +105,7 @@ const Game = () => {
             <Fragment>
             <h2>Hello {userEmail}!</h2>
             <div>
+                {/* <PlayNoteButton /> */}
                 <button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</button>
                 <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
                     <button onClick={PlayNote}>🔊</button>

@@ -64,7 +64,16 @@ const Game = () => {
         console.log(randomNote)
     };
     
+    const getRandomAnswers = () => {
+        let randomNum = Math.floor(Math.random() * 10)
+        if ( randomNum % 2 === 0 ) {
+            isAnswerLeft = true;
+        } else {
+            isAnswerLeft = false;
+        }
+    }
     
+    getRandomAnswers()
 
     return (
         <div>

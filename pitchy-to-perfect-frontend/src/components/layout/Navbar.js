@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 const Navbar = () => {
     const [isAuth, setIsAuth] = useState(false);
@@ -11,32 +12,40 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className="nav">
-        <h1>P2P</h1>
-        <ul>
-            {isAuth === true ? (
-            <Fragment>
-                {' '}
-                <li>
-                <Link to='/game'>Game</Link>
-                </li>
-                <li>
-                <Link to='/logout'>Logout</Link>
-                </li>
-            </Fragment>
-            ) : (
-            <Fragment>
-                {' '}
-                <li>
-                <Link to='/login'>Login</Link>
-                </li>
-                <li>
-                <Link to='/signup'>Signup</Link>
-                </li>
-            </Fragment>
-            )}
-        </ul>
-        </nav>
+        <Menu stackable className="ui stackable menu"> 
+            <div>
+                {isAuth === true ? (
+                <Fragment>
+                    {' '}
+                    <Menu.Item>P2P</Menu.Item>
+                    <Menu.Item className="item">
+                        <li>
+                        <Link to='/game'>Game</Link>
+                        </li>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <li>
+                        <Link to='/logout'>Logout</Link>
+                        </li>
+                    </Menu.Item>
+                </Fragment>
+                ) : (
+                <Fragment>
+                    {' '}
+                    <Menu.Item>
+                        <li>
+                        <Link to='/login'>Login</Link>
+                        </li>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <li>
+                        <Link to='/signup'>Signup</Link>
+                        </li>
+                    </Menu.Item>
+                </Fragment>
+                )}
+            </div>
+        </Menu>
     );
 };
 

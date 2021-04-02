@@ -6,6 +6,7 @@ import GetRandomNote from './utils/GetRandomNote'
 import './game.css'
 
 const Game = () => {
+    const [username, setUsername] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [isActive, setIsActive] = useState(false);
@@ -30,6 +31,7 @@ const Game = () => {
             })
             .then(res => res.json())
             .then(data => {
+                setUsername(data.username);
                 setUserEmail(data.email);
                 setLoading(false);
             });
@@ -119,7 +121,7 @@ const Game = () => {
         <div>
         {loading === false && (
             <Fragment>
-            <h2>Hello {userEmail}!</h2>
+            <h2>Hello {username}!</h2>
             <div>
                 {/* <PlayNoteButton /> */}
                 <button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</button>

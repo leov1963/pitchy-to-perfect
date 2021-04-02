@@ -15,7 +15,7 @@ const Game = () => {
     let [currentScore, setCurrentScore] = useState(0);
 
     const synth = new Tone.Synth().toDestination();
-    
+
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
             window.location.replace('http://localhost:3000/login');
@@ -50,7 +50,6 @@ const Game = () => {
         // wrongNoteCheck()
     }
 
-
     // Checks if wrong note is the same as random note and generates a new one if needed. not working
     // const wrongNoteCheck = () => {
     //     let wrongNote = wrongRandomNote
@@ -62,7 +61,7 @@ const Game = () => {
     // }
     // let randomNote = myNotes[Math.floor(Math.random()*myNotes.length)];
     // let randomNote2 = myNotes[Math.floor(Math.random()*myNotes.length)];
-    
+
     const PlayNote = () => {
         synth.triggerAttackRelease(randomNote, "8n");
         console.log(randomNote)
@@ -78,7 +77,7 @@ const Game = () => {
     }
 
     const successCheckLeft = () => {
-        
+
         console.log("note choice check")
         // wrongRandomNote === randomNote is a temp fix while it continues to get doubles
         if (isAnswerLeft === true || wrongRandomNote === randomNote) {
@@ -94,7 +93,7 @@ const Game = () => {
     }
 
     const successCheckRight = () => {
-        
+
         if (isAnswerLeft === false || wrongRandomNote === randomNote) {
             console.log("Correct Answer!")
             PlayNote()

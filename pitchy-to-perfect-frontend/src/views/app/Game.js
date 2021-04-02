@@ -2,19 +2,17 @@ import React, { useState, useEffect, Fragment } from 'react';
 import * as Tone from 'tone'
 // import { Button, Icon } from 'semantic-ui-react'
 // import PlayNoteButton from '../ui/PlayNoteButton'
+import GetRandomNote from './utils/GetRandomNote'
 import './game.css'
-
-
-
 
 const Game = () => {
     const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [isActive, setIsActive] = useState(false);
-    // const [randomNote, setRandomNote] = useState("")
-    // const [randomNote2, setRandomNote2] = useState("")
-
-    let isAnswerLeft = false;
+    const [randomNote, setRandomNote] = useState("")
+    const [wrongRandomNote, setWrongRandomNote] = useState("")
+    const [isAnswerLeft, setIsAnswerLeft] = useState(false);
+    // let isAnswerLeft = false;
 
     const synth = new Tone.Synth().toDestination();
     
@@ -37,27 +35,31 @@ const Game = () => {
         }
     }, []);
 
-    const startGame = () => {
+    const startGame = async () => {
         setIsActive(!isActive);
+        setRandomNote(GetRandomNote())
+        setWrongRandomNote(GetRandomNote())
+        getRandomAnswers()
+        // wrongNoteCheck()
     };
-    
-    const myNotes = [
-        "C4",
-        "C#4",
-        "D4",
-        "D#4",
-        "E4",
-        "F4",
-        "F#4",
-        "G4",
-        "G#4",
-        "A4",
-        "A#4",
-        "B4"
-    ];
 
-    let randomNote = myNotes[Math.floor(Math.random()*myNotes.length)];
-    let randomNote2 = myNotes[Math.floor(Math.random()*myNotes.length)];
+    const newRound = async () => {
+        setRandomNote(GetRandomNote())
+        setWrongRandomNote(GetRandomNote())
+        getRandomAnswers()
+        // wrongNoteCheck()
+    }
+
+    // const wrongNoteCheck = () => {
+    //     let wrongNote = wrongRandomNote
+    //     console.log("Checking wrong note")
+    //     console.log(randomNote, wrongRandomNote)
+    //     if (wrongNote === randomNote) {
+    //         console.log("*****double notes detected*****")
+    //     }
+    // }
+    // let randomNote = myNotes[Math.floor(Math.random()*myNotes.length)];
+    // let randomNote2 = myNotes[Math.floor(Math.random()*myNotes.length)];
     
     const PlayNote = () => {
         synth.triggerAttackRelease(randomNote, "8n");
@@ -66,36 +68,40 @@ const Game = () => {
 
     const getRandomAnswers = () => {
         let randomNum = Math.floor(Math.random() * 10)
+        console.log("Random answer check")
         if ( randomNum % 2 === 0 ) {
-            isAnswerLeft = true;
+            setIsAnswerLeft(true);
+            console.log("left test")
         } else {
-            isAnswerLeft = false;
+            setIsAnswerLeft(false);
+            console.log("right test")
         }
         
     }
 
-    getRandomAnswers()
-
-
     const successCheckLeft = () => {
         
         console.log("note choice check")
-        if (isAnswerLeft == true) {
+        if (isAnswerLeft === true || wrongRandomNote === randomNote) {
             console.log("Correct Answer!")
             PlayNote()
+            newRound()
         } else {
             console.log("Wrong Answer!")
+            newRound()
         }   
     }
 
     const successCheckRight = () => {
         
         console.log("note choice check")
-        if (isAnswerLeft == false) {
+        if (isAnswerLeft === false || wrongRandomNote === randomNote) {
             console.log("Correct Answer!")
             PlayNote()
+            newRound()
         } else {
             console.log("Wrong Answer!")
+            newRound()
         }   
     }
 
@@ -118,15 +124,15 @@ const Game = () => {
                     onClick={successCheckLeft} 
                     className={`note-btn ${!isActive ? "hidden" : ""}`} 
                     id="note-btn"
-                    value={`${isAnswerLeft ?randomNote : randomNote2 }`}>
-                        {`${isAnswerLeft ?randomNote : randomNote2 }`}
+                    value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
+                        {`${isAnswerLeft ?randomNote : wrongRandomNote }`}
                 </button>
                 <button
                     onClick={successCheckRight} 
                     className={`note-btn ${!isActive ? "hidden" : ""}`} 
                     id="note-btn"
-                    value={`${isAnswerLeft ?randomNote2 : randomNote }`}>
-                        {`${isAnswerLeft ?randomNote2 : randomNote }`}
+                    value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
+                        {`${isAnswerLeft ?wrongRandomNote : randomNote }`}
                 </button>
             </div>
             </Fragment>

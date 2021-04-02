@@ -12,7 +12,6 @@ const Game = () => {
     const [randomNote, setRandomNote] = useState("")
     const [wrongRandomNote, setWrongRandomNote] = useState("")
     const [isAnswerLeft, setIsAnswerLeft] = useState(false);
-    // let isAnswerLeft = false;
 
     const synth = new Tone.Synth().toDestination();
     
@@ -50,6 +49,8 @@ const Game = () => {
         // wrongNoteCheck()
     }
 
+
+    // Checks if wrong note is the same as random note and generates a new one if needed. not working
     // const wrongNoteCheck = () => {
     //     let wrongNote = wrongRandomNote
     //     console.log("Checking wrong note")
@@ -68,13 +69,9 @@ const Game = () => {
 
     const getRandomAnswers = () => {
         let randomNum = Math.floor(Math.random() * 10)
-        console.log("Random answer check")
         if ( randomNum % 2 === 0 ) {
             setIsAnswerLeft(true);
-            console.log("left test")
         } else {
-            setIsAnswerLeft(false);
-            console.log("right test")
         }
         
     }
@@ -82,6 +79,7 @@ const Game = () => {
     const successCheckLeft = () => {
         
         console.log("note choice check")
+        // wrongRandomNote === randomNote is a temp fix while it continues to get doubles
         if (isAnswerLeft === true || wrongRandomNote === randomNote) {
             console.log("Correct Answer!")
             PlayNote()
@@ -94,7 +92,6 @@ const Game = () => {
 
     const successCheckRight = () => {
         
-        console.log("note choice check")
         if (isAnswerLeft === false || wrongRandomNote === randomNote) {
             console.log("Correct Answer!")
             PlayNote()

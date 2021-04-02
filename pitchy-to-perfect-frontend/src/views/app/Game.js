@@ -72,15 +72,24 @@ const Game = () => {
     getRandomAnswers()
 
 
-    const successCheck = () => {
+    const successCheckLeft = () => {
         
         console.log("note choice check")
-        // if (e.target.value === randomNote) {
-        //     console.log("success")
-        // }else {
-        //     console.log("Failure")
-        // }   
-        // getRandomAnswers()    
+        if (isAnswerLeft == true) {
+            console.log("Correct Answer!")
+        } else {
+            console.log("Wrong Answer!")
+        }   
+    }
+
+    const successCheckRight = () => {
+        
+        console.log("note choice check")
+        if (isAnswerLeft == false) {
+            console.log("Correct Answer!")
+        } else {
+            console.log("Wrong Answer!")
+        }   
     }
 
     return (
@@ -98,14 +107,14 @@ const Game = () => {
             <br />
             <div>
                 <button 
-                    onClick={successCheck} 
+                    onClick={successCheckLeft} 
                     className={`note-btn ${!isActive ? "hidden" : ""}`} 
                     id="note-btn"
                     value={`${isAnswerLeft ?randomNote : randomNote2 }`}>
                         {`${isAnswerLeft ?randomNote : randomNote2 }`}
                 </button>
                 <button
-                    onClick={successCheck} 
+                    onClick={successCheckRight} 
                     className={`note-btn ${!isActive ? "hidden" : ""}`} 
                     id="note-btn"
                     value={`${isAnswerLeft ?randomNote2 : randomNote }`}>

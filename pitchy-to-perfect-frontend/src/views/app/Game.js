@@ -70,8 +70,8 @@ const Game = () => {
 
     const PlayGrossNote = () => {
         console.log("GROSS!")
-        synth.triggerAttackRelease("C#3", "8n", now)
-        synth.triggerAttackRelease("C3", "8n", now + 1)
+        synth.triggerAttackRelease("C#3", "8n")
+        
     }
 
     const getRandomAnswers = () => {

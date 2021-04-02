@@ -12,9 +12,10 @@ const Game = () => {
     const [randomNote, setRandomNote] = useState("");
     const [wrongRandomNote, setWrongRandomNote] = useState("");
     const [isAnswerLeft, setIsAnswerLeft] = useState(false);
-    let [currentScore, setCurrentScore] = useState(0);
+    const [currentScore, setCurrentScore] = useState(0);
 
     const synth = new Tone.Synth().toDestination();
+    const now = Tone.now();
 
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
@@ -67,13 +68,19 @@ const Game = () => {
         console.log(randomNote)
     };
 
+    const PlayGrossNote = () => {
+        console.log("GROSS!")
+        synth.triggerAttackRelease("C#3", "8n", now)
+        synth.triggerAttackRelease("C3", "8n", now + 1)
+    }
+
     const getRandomAnswers = () => {
         let randomNum = Math.floor(Math.random() * 10)
         if ( randomNum % 2 === 0 ) {
             setIsAnswerLeft(true);
         } else {
+            setIsAnswerLeft(false);
         }
-        
     }
 
     const successCheckLeft = () => {
@@ -84,11 +91,12 @@ const Game = () => {
             console.log("Correct Answer!")
             PlayNote()
             newRound()
-            setCurrentScore(currentScore += 1)
+            setCurrentScore(currentScore + 1)
         } else {
             console.log("Wrong Answer!")
             newRound()
-            setCurrentScore(currentScore = 0)
+            setCurrentScore(currentScore - currentScore)
+            PlayGrossNote()
         }   
     }
 
@@ -98,11 +106,12 @@ const Game = () => {
             console.log("Correct Answer!")
             PlayNote()
             newRound()
-            setCurrentScore(currentScore += 1)
+            setCurrentScore(currentScore + 1)
         } else {
             console.log("Wrong Answer!")
             newRound()
-            setCurrentScore(currentScore = 0)
+            setCurrentScore(currentScore - currentScore)
+            PlayGrossNote()
         }   
     }
 
@@ -115,27 +124,30 @@ const Game = () => {
                 {/* <PlayNoteButton /> */}
                 <button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</button>
             </div>
-            <div>current score: {currentScore}</div>
-            <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
-                <button onClick={PlayNote}>🔊</button>
-                play note
-            </div>
-            <br />
             <div>
-                <button 
-                    onClick={successCheckLeft} 
-                    className={`note-btn ${!isActive ? "hidden" : ""}`} 
-                    id="note-btn"
-                    value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
-                        {`${isAnswerLeft ?randomNote : wrongRandomNote }`}
-                </button>
-                <button
-                    onClick={successCheckRight} 
-                    className={`note-btn ${!isActive ? "hidden" : ""}`} 
-                    id="note-btn"
-                    value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
-                        {`${isAnswerLeft ?wrongRandomNote : randomNote }`}
-                </button>
+                <div>current score: {currentScore}</div>
+                <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
+                    <button onClick={PlayNote}>🔊</button>
+                    play note
+                </div>
+                <br />
+                <div>
+                    <button 
+                        onClick={successCheckLeft} 
+                        className={`note-btn ${!isActive ? "hidden" : ""}`} 
+                        id="note-btn"
+                        value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
+                            {`${isAnswerLeft ?randomNote : wrongRandomNote }`}
+                    </button>
+                    <button
+                        onClick={successCheckRight} 
+                        className={`note-btn ${!isActive ? "hidden" : ""}`} 
+                        id="note-btn"
+                        value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
+                            {`${isAnswerLeft ?wrongRandomNote : randomNote }`}
+                    </button>
+                </div>
+
             </div>
             </Fragment>
         )}

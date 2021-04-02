@@ -37,8 +37,10 @@ const Game = () => {
             <h2>Hello {userEmail}!</h2>
             <div>
                 <button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</button>
-                <button>🔊</button>
-                replay note
+                <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
+                    <button>🔊</button>
+                    replay note
+                </div>
             </div>
             <br />
             <div>

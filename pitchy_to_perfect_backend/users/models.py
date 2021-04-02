@@ -9,3 +9,9 @@ class CustomUser(AbstractUser):
         return self.email
     def __str__(self):
         return self.username
+
+class HighScore(models.Model):
+    date = models.DateField('score date')
+    score = models.IntegerField()
+
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

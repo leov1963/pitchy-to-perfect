@@ -1,7 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-// import useSound from 'use-sound';
 import * as Tone from 'tone'
-// import cNote from '../../assets/C-Note.mp3'
 import './game.css'
 
 const Game = () => {
@@ -52,10 +50,7 @@ const Game = () => {
     ];
 
     const randomNote = myNotes[Math.floor(Math.random()*myNotes.length)];
-    
-    
 
-    
     const randomNote2 = myNotes[Math.floor(Math.random()*myNotes.length)];
 
     
@@ -63,7 +58,7 @@ const Game = () => {
         synth.triggerAttackRelease(randomNote, "8n");
         console.log(randomNote)
     };
-    
+
     const getRandomAnswers = () => {
         let randomNum = Math.floor(Math.random() * 10)
         if ( randomNum % 2 === 0 ) {
@@ -72,7 +67,7 @@ const Game = () => {
             isAnswerLeft = false;
         }
     }
-    
+
     getRandomAnswers()
 
     return (

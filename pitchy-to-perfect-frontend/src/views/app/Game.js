@@ -7,7 +7,6 @@ import './game.css'
 
 const Game = () => {
     const [username, setUsername] = useState('');
-    const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [isActive, setIsActive] = useState(false);
     const [randomNote, setRandomNote] = useState("");
@@ -32,7 +31,6 @@ const Game = () => {
             .then(res => res.json())
             .then(data => {
                 setUsername(data.username);
-                setUserEmail(data.email);
                 setLoading(false);
             });
         }
@@ -149,7 +147,6 @@ const Game = () => {
                             {`${isAnswerLeft ?wrongRandomNote : randomNote }`}
                     </button>
                 </div>
-
             </div>
             </Fragment>
         )}

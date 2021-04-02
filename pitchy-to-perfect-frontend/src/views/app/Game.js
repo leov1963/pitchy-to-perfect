@@ -6,6 +6,8 @@ const Game = () => {
     const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [isActive, setIsActive] = useState(false);
+    // const [randomNote, setRandomNote] = useState("")
+    // const [randomNote2, setRandomNote2] = useState("")
 
     let isAnswerLeft = false;
 
@@ -49,10 +51,8 @@ const Game = () => {
         "B4"
     ];
 
-    const randomNote = myNotes[Math.floor(Math.random()*myNotes.length)];
-
-    const randomNote2 = myNotes[Math.floor(Math.random()*myNotes.length)];
-
+    let randomNote = myNotes[Math.floor(Math.random()*myNotes.length)];
+    let randomNote2 = myNotes[Math.floor(Math.random()*myNotes.length)];
     
     const PlayNote = () => {
         synth.triggerAttackRelease(randomNote, "8n");
@@ -66,9 +66,22 @@ const Game = () => {
         } else {
             isAnswerLeft = false;
         }
+        
     }
 
     getRandomAnswers()
+
+
+    const successCheck = () => {
+        
+        console.log("note choice check")
+        // if (e.target.value === randomNote) {
+        //     console.log("success")
+        // }else {
+        //     console.log("Failure")
+        // }   
+        // getRandomAnswers()    
+    }
 
     return (
         <div>
@@ -84,8 +97,20 @@ const Game = () => {
             </div>
             <br />
             <div>
-                <button className={`note-btn ${!isActive ? "hidden" : ""}`} id="note-btn">{`${isAnswerLeft ?randomNote : randomNote2 }`}</button>
-                <button className={`note-btn ${!isActive ? "hidden" : ""}`} id="note-btn">{`${isAnswerLeft ?randomNote2 : randomNote }`}</button>
+                <button 
+                    onClick={successCheck} 
+                    className={`note-btn ${!isActive ? "hidden" : ""}`} 
+                    id="note-btn"
+                    value={`${isAnswerLeft ?randomNote : randomNote2 }`}>
+                        {`${isAnswerLeft ?randomNote : randomNote2 }`}
+                </button>
+                <button
+                    onClick={successCheck} 
+                    className={`note-btn ${!isActive ? "hidden" : ""}`} 
+                    id="note-btn"
+                    value={`${isAnswerLeft ?randomNote2 : randomNote }`}>
+                        {`${isAnswerLeft ?randomNote2 : randomNote }`}
+                </button>
             </div>
             </Fragment>
         )}

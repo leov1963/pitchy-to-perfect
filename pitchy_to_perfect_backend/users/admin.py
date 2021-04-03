@@ -10,4 +10,5 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
     list_display = ['email']
-admin.site.register(CustomUser, HighScore, CustomUserAdmin)
+admin.site.register(CustomUser)
+admin.site.register(HighScore)

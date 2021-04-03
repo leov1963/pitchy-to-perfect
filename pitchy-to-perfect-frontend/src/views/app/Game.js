@@ -1,8 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import * as Tone from 'tone'
-// import { Button, Icon } from 'semantic-ui-react'
-// import PlayNoteButton from '../ui/PlayNoteButton'
 import GetRandomNote from './utils/GetRandomNote'
+import { Button, Header, Icon } from 'semantic-ui-react'
 import './game.css'
 
 const Game = () => {
@@ -87,16 +86,22 @@ const Game = () => {
 
         console.log("note choice check")
         // wrongRandomNote === randomNote is a temp fix while it continues to get doubles
+        
         if (isAnswerLeft === true || wrongRandomNote === randomNote) {
-            console.log("Correct Answer!")
+            console.log("Correct Answer! now it should be green")
             PlayNote()
-            newRound()
-            setCurrentScore(currentScore + 1)
+            setTimeout( () => {
+                newRound()
+                setCurrentScore(currentScore + 1)
+            }, 1000)
+            
         } else {
             console.log("Wrong Answer!")
-            newRound()
-            setCurrentScore(currentScore - currentScore)
             PlayGrossNote()
+            setTimeout( () => {
+                newRound()
+                setCurrentScore(currentScore - currentScore)
+            }, 1000)
         }   
     }
 
@@ -105,13 +110,17 @@ const Game = () => {
         if (isAnswerLeft === false || wrongRandomNote === randomNote) {
             console.log("Correct Answer!")
             PlayNote()
-            newRound()
-            setCurrentScore(currentScore + 1)
+            setTimeout( () => {
+                newRound()
+                setCurrentScore(currentScore + 1)
+            }, 1000)
         } else {
             console.log("Wrong Answer!")
-            newRound()
-            setCurrentScore(currentScore - currentScore)
             PlayGrossNote()
+            setTimeout( () => {
+                newRound()
+                setCurrentScore(currentScore - currentScore)
+            }, 1000)
         }   
     }
 
@@ -119,10 +128,10 @@ const Game = () => {
         <div>
         {loading === false && (
             <Fragment>
-            <h2>Hello {username}!</h2>
+            <Header as="h2" textAlign="center">Hello {username}!</Header>
             <div>
                 {/* <PlayNoteButton /> */}
-                <button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</button>
+                <Button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</Button>
             </div>
             <div>
                 <div>current score: {currentScore}</div>

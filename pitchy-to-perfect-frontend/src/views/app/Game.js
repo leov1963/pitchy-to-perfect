@@ -125,41 +125,44 @@ const Game = () => {
     }
 
     return (
-        <div className="game-container">
+        <div>
         {loading === false && (
             <Fragment>
-            <Header as="h2" textAlign="center">Hello {username}!</Header>
-            <div className={`start-btn ${isActive ? "hidden" : ""}`}>
-                {/* <PlayNoteButton /> */}
-                <Button onClick={startGame} id="start">Start!</Button>
-            </div>
-            <div className={`game-btns ${!isActive ? "hidden" : ""}`}>
-                <div>current score: {currentScore}</div>
-                <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
-                    <Button primary onClick={PlayNote}>
-                        <Icon name='volume up' />
+                <div className="game-container">
+                    <Header as="h2" textAlign="center">Hello {username}!</Header>
+                    <div>current score: {currentScore}</div>
+                    <div className={`start-btn main-btns ${isActive ? "hidden" : ""}`}>
+                    {/* <PlayNoteButton /> */}
+                        <Button size='huge' primary onClick={startGame} className="start-btn" id="start">Start!</Button>
+                    </div>
+                    <div className={`game-btns ${!isActive ? "hidden" : ""}`}>
+                        <div className='play-note-btn main-btns'>
+                            <Button size='huge' primary onClick={PlayNote}>
+                                <Icon name='volume up' size='large'/>
+                                {/* <Icon name='itunes note' /> */}
+                                <br />
+                            </Button>
+                            <div>play note</div>
+                        </div>
                         <br />
-                    </Button>
-                    <div>play note</div>
+                        <div>
+                            <div>Which note is this?</div>
+                            <Button size='huge' secondary 
+                                onClick={successCheckLeft} 
+                                className={`note-btn ${!isActive ? "hidden" : ""}`} 
+                                id="note-btn"
+                                value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
+                                    {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
+                            </Button>
+                            <Button size='huge' secondary
+                                onClick={successCheckRight} 
+                                id="note-btn"
+                                value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
+                                    {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-                <br />
-                <div>
-                    <div>Which note is this?</div>
-                    <Button secondary 
-                        onClick={successCheckLeft} 
-                        className={`note-btn ${!isActive ? "hidden" : ""}`} 
-                        id="note-btn"
-                        value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
-                            {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
-                    </Button>
-                    <Button secondary
-                        onClick={successCheckRight} 
-                        id="note-btn"
-                        value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
-                            {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
-                    </Button>
-                </div>
-            </div>
             </Fragment>
         )}
         </div>

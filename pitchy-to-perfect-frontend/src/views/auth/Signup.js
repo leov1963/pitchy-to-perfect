@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react';
+
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -52,50 +54,59 @@ const Signup = () => {
 
     return (
         <div>
-        {loading === false && <h1>Signup</h1>}
+        {loading === false}
         {errors === true && <h2>Cannot signup with provided credentials</h2>}
-        <form onSubmit={onSubmit}>
-            
-            <label htmlFor='email'>Username:</label> <br />
-            <input
-            name='username'
-            type='username'
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            required
-            />{' '}
-
-            <br />
-            
-            <label htmlFor='email'>Email address:</label> <br />
-            <input
-            name='email'
-            type='email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            />{' '}
-            <br />
-            <label htmlFor='password1'>Password:</label> <br />
-            <input
-            name='password1'
-            type='password'
-            value={password1}
-            onChange={e => setPassword1(e.target.value)}
-            required
-            />{' '}
-            <br />
-            <label htmlFor='password2'>Confirm password:</label> <br />
-            <input
-            name='password2'
-            type='password'
-            value={password2}
-            onChange={e => setPassword2(e.target.value)}
-            required
-            />{' '}
-            <br />
-            <input type='submit' value='Signup' />
-        </form>
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>                
+                <Header as='h2' color='teal' textAlign='center'>
+                    <Icon size='huge' name='signup' />Sign-up!
+                </Header>
+                <Form size='large' onSubmit={onSubmit}>
+                    <Segment stacked>
+                        
+                        {/* <label htmlFor='email'>Username:</label> <br /> */}
+                        <Form.Input 
+                            fluid 
+                            icon='user' 
+                            iconPosition='left' 
+                            placeholder='User Name' 
+                            onChange={e => setUsername(e.target.value)}
+                        />
+                        <br />           
+                        {/* <label htmlFor='email'>Email address:</label> <br /> */}
+                        <Form.Input 
+                            fluid 
+                            icon='mail' 
+                            iconPosition='left' 
+                            placeholder='E-mail address' 
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                        <br />
+                        <Form.Input
+                            fluid
+                            icon='lock'
+                            iconPosition='left'
+                            placeholder='Password'
+                            type='password'
+                            onChange={e => setPassword1(e.target.value)}
+                        />
+                        <br />
+                        <Form.Input
+                            fluid
+                            icon='lock'
+                            iconPosition='left'
+                            placeholder='Password'
+                            type='password'
+                            onChange={e => setPassword2(e.target.value)}
+                        />
+                        <br />
+                        <Button color='teal' fluid size='large'>
+                            Sign-up
+                        </Button>
+                    </Segment>
+                </Form>
+            </Grid.Column>
+        </Grid>
         </div>
     );
 };

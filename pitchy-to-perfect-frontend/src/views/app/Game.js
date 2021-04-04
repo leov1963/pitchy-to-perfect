@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import * as Tone from 'tone'
 import GetRandomNote from './utils/GetRandomNote'
-import { Button, Header, Icon } from 'semantic-ui-react'
+import { Button, Header, Icon, Grid } from 'semantic-ui-react'
 import './game.css'
 
 const Game = () => {
@@ -128,42 +128,46 @@ const Game = () => {
         <div>
         {loading === false && (
             <Fragment>
-                <div className="game-container">
-                    <Header as="h2" textAlign="center">Hello {username}!</Header>
-                    <div>current score: {currentScore}</div>
-                    <div className={`start-btn main-btns ${isActive ? "hidden" : ""}`}>
-                    {/* <PlayNoteButton /> */}
-                        <Button size='huge' primary onClick={startGame} className="start-btn" id="start">Start!</Button>
-                    </div>
-                    <div className={`game-btns ${!isActive ? "hidden" : ""}`}>
-                        <div className='play-note-btn main-btns'>
-                            <Button size='huge' primary onClick={PlayNote}>
-                                <Icon name='volume up' size='large'/>
-                                {/* <Icon name='itunes note' /> */}
-                            </Button>
+                <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                    <Grid.Column style={{ maxWidth: 450 }}>
+                        <div className="game-container">
+                            <Header as="h2" textAlign="center">Hello {username}!</Header>
+                            <div>current score: {currentScore}</div>
+                            <div className={`start-btn main-btns ${isActive ? "hidden" : ""}`}>
+                            {/* <PlayNoteButton /> */}
+                                <Button size='huge' primary onClick={startGame} className="start-btn" id="start">Start!</Button>
+                            </div>
+                            <div className={`game-btns ${!isActive ? "hidden" : ""}`}>
+                                <div className='play-note-btn main-btns'>
+                                    <Button size='huge' primary onClick={PlayNote}>
+                                        <Icon name='volume up' size='large'/>
+                                        {/* <Icon name='itunes note' /> */}
+                                    </Button>
+                                        <br />
+                                    <div>*play note*</div>
+                                </div>
                                 <br />
-                            <div>*play note*</div>
-                        </div>
-                        <br />
-                        <div>
-                            <div>Which note is this?</div>
-                            <Button size='huge' secondary 
-                                onClick={successCheckLeft} 
-                                className='note-btn'
-                                id="note-btn"
-                                value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
-                                    {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
-                            </Button>
-                            <Button size='huge' secondary
-                                onClick={successCheckRight}
-                                className='note-btn' 
-                                id="note-btn"
-                                value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
-                                    {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+                                <div>
+                                    <div>Which note is this?</div>
+                                    <Button size='huge' secondary 
+                                        onClick={successCheckLeft} 
+                                        className='note-btn'
+                                        id="note-btn"
+                                        value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
+                                            {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
+                                    </Button>
+                                    <Button size='huge' secondary
+                                        onClick={successCheckRight}
+                                        className='note-btn' 
+                                        id="note-btn"
+                                        value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
+                                            {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>                       
+                    </Grid.Column>
+                </Grid>
             </Fragment>
         )}
         </div>

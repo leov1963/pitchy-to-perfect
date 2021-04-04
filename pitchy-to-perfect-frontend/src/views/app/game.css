@@ -1,4 +1,4 @@
-Button {
+.note-btn {
     height: 60px;
     width: 90px;
 }
@@ -7,7 +7,6 @@ Button {
     padding: 30px;
     display: flex;
     flex-direction: column;
-    
 }
 
 .hidden {

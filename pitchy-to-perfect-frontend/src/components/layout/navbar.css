@@ -1,0 +1,61 @@
+a {
+    color: black;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+body {
+    margin:0px;
+    font-family:'Roboto';
+    text-align:center;
+}
+
+#container {
+    color:#999;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight:bold;
+    text-align:center;
+    width:100%;
+    bottom:45%;
+    display:block;
+}
+
+#flip {
+    height:20px;
+    overflow:hidden;
+}
+
+#flip > div > div {
+    color:#000;
+    padding:0px 6px;
+    height:45px;
+    margin-bottom:45px;
+    display:inline-block;
+}
+
+#flip div:first-child {
+    animation: show 10s linear infinite;
+}
+
+#flip div div {
+    color:#4ec7f3;
+}
+#flip div:first-child div {
+    
+    color:#42c58a;
+}
+#flip div:last-child div {
+    color:#DC143C;
+}
+
+@keyframes show {
+    0% {margin-top:-260px;}
+    5% {margin-top:-180px;}
+    33% {margin-top:-180px;}
+    38% {margin-top:-90px;}
+    66% {margin-top:-90px;}
+    71% {margin-top:0px;}
+    99.99% {margin-top:0px;}
+    100% {margin-top:-260px;}
+}

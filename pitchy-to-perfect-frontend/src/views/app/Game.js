@@ -140,22 +140,23 @@ const Game = () => {
                             <Button size='huge' primary onClick={PlayNote}>
                                 <Icon name='volume up' size='large'/>
                                 {/* <Icon name='itunes note' /> */}
-                                <br />
                             </Button>
-                            <div>play note</div>
+                                <br />
+                            <div>*play note*</div>
                         </div>
                         <br />
                         <div>
                             <div>Which note is this?</div>
                             <Button size='huge' secondary 
                                 onClick={successCheckLeft} 
-                                className={`note-btn ${!isActive ? "hidden" : ""}`} 
+                                className='note-btn'
                                 id="note-btn"
                                 value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
                                     {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
                             </Button>
                             <Button size='huge' secondary
-                                onClick={successCheckRight} 
+                                onClick={successCheckRight}
+                                className='note-btn' 
                                 id="note-btn"
                                 value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
                                     {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}

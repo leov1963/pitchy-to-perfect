@@ -58,14 +58,6 @@ const Login = () => {
                     </Header>
                     <Form size='large' onSubmit={onSubmit}>
                         <Segment stacked>
-                            {/* <label htmlFor='email'>Email address:</label> <br />
-                            <input
-                                name='email'
-                                type='email'
-                                value={email}
-                                required
-                                onChange={e => setEmail(e.target.value)}
-                            />{' '} */}
                             <Form.Input 
                                 fluid 
                                 icon='user' 
@@ -80,17 +72,7 @@ const Login = () => {
                                 placeholder='Password'
                                 type='password'
                                 onChange={e => setPassword(e.target.value)}
-                            />
-                            
-                            {/* <label htmlFor='password'>Password:</label> <br />
-                            <input
-                                name='password'
-                                type='password'
-                                value={password}
-                                required
-                                onChange={e => setPassword(e.target.value)}
-                            />{' '} */}
-                            
+                            />                            
                             <Button color='teal' fluid size='large'>
                                 Login
                             </Button>

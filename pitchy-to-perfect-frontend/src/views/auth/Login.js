@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react';
+import './auth.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -46,30 +48,59 @@ const Login = () => {
 
     return (
         <div>
-        {loading === false && <h1>Login</h1>}
+        {/* {loading === false && <h1>Login</h1>} */}
         {errors === true && <h2>Cannot log in with provided credentials</h2>}
         {loading === false && (
-            <form onSubmit={onSubmit}>
-            <label htmlFor='email'>Email address:</label> <br />
-            <input
-                name='email'
-                type='email'
-                value={email}
-                required
-                onChange={e => setEmail(e.target.value)}
-            />{' '}
-            <br />
-            <label htmlFor='password'>Password:</label> <br />
-            <input
-                name='password'
-                type='password'
-                value={password}
-                required
-                onChange={e => setPassword(e.target.value)}
-            />{' '}
-            <br />
-            <input type='submit' value='Login' />
-            </form>
+            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                <Grid.Column style={{ maxWidth: 450 }}>
+                    <Header as='h2' color='teal' textAlign='center'>
+                        <Icon size='huge' name='sign-in' />Log-in to your account
+                    </Header>
+                    <Form size='large' onSubmit={onSubmit}>
+                        <Segment stacked>
+                            {/* <label htmlFor='email'>Email address:</label> <br />
+                            <input
+                                name='email'
+                                type='email'
+                                value={email}
+                                required
+                                onChange={e => setEmail(e.target.value)}
+                            />{' '} */}
+                            <Form.Input 
+                                fluid 
+                                icon='user' 
+                                iconPosition='left' 
+                                placeholder='E-mail address' 
+                                onChange={e => setEmail(e.target.value)}
+                            />
+                            <Form.Input
+                                fluid
+                                icon='lock'
+                                iconPosition='left'
+                                placeholder='Password'
+                                type='password'
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            
+                            {/* <label htmlFor='password'>Password:</label> <br />
+                            <input
+                                name='password'
+                                type='password'
+                                value={password}
+                                required
+                                onChange={e => setPassword(e.target.value)}
+                            />{' '} */}
+                            
+                            <Button color='teal' fluid size='large'>
+                                Login
+                            </Button>
+                        </Segment>
+                    </Form>
+                    <Message>
+                        New to us? <a className='sign-up-link' href='/signup'>Sign Up</a>
+                    </Message>
+                </Grid.Column>
+            </Grid>
         )}
         </div>
     );

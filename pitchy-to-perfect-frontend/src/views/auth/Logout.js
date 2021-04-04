@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { Button, Header, Icon } from 'semantic-ui-react'
 
 const Logout = () => {
     const [loading, setLoading] = useState(true);
@@ -33,8 +34,8 @@ const Logout = () => {
         <div>
         {loading === false && (
             <Fragment>
-            <h1>Are you sure you want to logout?</h1>
-            <input type='button' value='Logout' onClick={handleLogout} />
+                <Header as="h2" textAlign="center">Are you sure you want to logout?</Header>
+                <Button value='Logout' onClick={handleLogout}>Log out</Button>
             </Fragment>
         )}
         </div>

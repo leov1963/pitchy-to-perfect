@@ -125,36 +125,39 @@ const Game = () => {
     }
 
     return (
-        <div>
+        <div className="game-container">
         {loading === false && (
             <Fragment>
             <Header as="h2" textAlign="center">Hello {username}!</Header>
-            <div>
+            <div className={`start-btn ${isActive ? "hidden" : ""}`}>
                 {/* <PlayNoteButton /> */}
-                <Button onClick={startGame} className={`start-btn ${isActive ? "hidden" : ""}`} id="start">Start!</Button>
+                <Button onClick={startGame} id="start">Start!</Button>
             </div>
-            <div>
+            <div className={`game-btns ${!isActive ? "hidden" : ""}`}>
                 <div>current score: {currentScore}</div>
                 <div className={`play-note-btn ${!isActive ? "hidden" : ""}`}>
-                    <button onClick={PlayNote}>🔊</button>
-                    play note
+                    <Button primary onClick={PlayNote}>
+                        <Icon name='volume up' />
+                        <br />
+                    </Button>
+                    <div>play note</div>
                 </div>
                 <br />
                 <div>
-                    <button 
+                    <div>Which note is this?</div>
+                    <Button secondary 
                         onClick={successCheckLeft} 
                         className={`note-btn ${!isActive ? "hidden" : ""}`} 
                         id="note-btn"
                         value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
-                            {`${isAnswerLeft ?randomNote : wrongRandomNote }`}
-                    </button>
-                    <button
+                            {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
+                    </Button>
+                    <Button secondary
                         onClick={successCheckRight} 
-                        className={`note-btn ${!isActive ? "hidden" : ""}`} 
                         id="note-btn"
                         value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
-                            {`${isAnswerLeft ?wrongRandomNote : randomNote }`}
-                    </button>
+                            {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
+                    </Button>
                 </div>
             </div>
             </Fragment>

@@ -39,7 +39,7 @@ const Navbar = () => {
                         <Menu.Item as='a'>
                             <Link to='/logout'>
                                 <Icon name='sign-out' />
-                                Logout
+                                Log-out
                             </Link>
                         </Menu.Item>
                     </Fragment>
@@ -49,13 +49,13 @@ const Navbar = () => {
                         <Menu.Item as='a'>
                             <Link to='/login'>
                                 <Icon name='sign-in' />
-                                Login
+                                Log-in
                             </Link>
                         </Menu.Item>
                         <Menu.Item as='a'>
                             <Link to='/signup'>
                                 <Icon name='signup' />
-                                Signup
+                                Sign-up
                             </Link>
                         </Menu.Item>
                     </Fragment>

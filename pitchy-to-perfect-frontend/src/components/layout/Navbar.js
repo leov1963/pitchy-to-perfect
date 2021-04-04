@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import { Icon, Menu } from 'semantic-ui-react';
+import './navbar.css'
 
 const Navbar = () => {
     const [isAuth, setIsAuth] = useState(false);
@@ -12,40 +13,56 @@ const Navbar = () => {
     }, []);
 
     return (
-        <Menu stackable className="ui stackable menu"> 
-            <div>
-                {isAuth === true ? (
-                <Fragment>
-                    {' '}
-                    <Menu.Item>P2P</Menu.Item>
-                    <Menu.Item className="item">
-                        <li>
-                        <Link to='/game'>Game</Link>
-                        </li>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <li>
-                        <Link to='/logout'>Logout</Link>
-                        </li>
-                    </Menu.Item>
-                </Fragment>
-                ) : (
-                <Fragment>
-                    {' '}
-                    <Menu.Item>
-                        <li>
-                        <Link to='/login'>Login</Link>
-                        </li>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <li>
-                        <Link to='/signup'>Signup</Link>
-                        </li>
-                    </Menu.Item>
-                </Fragment>
-                )}
-            </div>
-        </Menu>
+        <div>
+            <Menu stackable icon='labeled'> 
+                <Menu.Item>
+                    <Link to='/'>
+                        <div id="container">
+                            <div id="flip">
+                                <div><div>Perfect</div></div>
+                                <div><div>to</div></div>
+                                <div><div>Pitchy</div></div>
+                            </div>
+                        </div>
+                    </Link>
+                </Menu.Item>
+                <Menu.Menu position='right'>
+                    {isAuth === true ? (
+                    <Fragment>
+                        {' '}                            
+                        <Menu.Item as='a' color='black'>
+                            <Link to='/game'>
+                                <Icon name='gamepad' />
+                                Game
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item as='a'>
+                            <Link to='/logout'>
+                                <Icon name='sign-out' />
+                                Logout
+                            </Link>
+                        </Menu.Item>
+                    </Fragment>
+                    ) : (
+                    <Fragment>
+                        {' '}
+                        <Menu.Item as='a'>
+                            <Link to='/login'>
+                                <Icon name='sign-in' />
+                                Login
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item as='a'>
+                            <Link to='/signup'>
+                                <Icon name='signup' />
+                                Signup
+                            </Link>
+                        </Menu.Item>
+                    </Fragment>
+                    )}                
+                </Menu.Menu>
+            </Menu>
+        </div>
     );
 };
 

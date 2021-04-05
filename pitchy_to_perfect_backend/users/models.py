@@ -10,10 +10,19 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
+    @property
+    def highest_score(self):
+        scores = HighScore.objects.filter(user=self)
+        if scores.count() > 0:
+            return scores.order_by('score').first().score
+        else:
+            return 0
+
 class HighScore(models.Model):
     date = models.DateField('score date')
     score = models.IntegerField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-    def __str__(self):
+    def __int__(self):
         return self.score
+

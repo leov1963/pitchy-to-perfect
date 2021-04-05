@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
     def highest_score(self):
         scores = HighScore.objects.filter(user=self)
         if scores.count() > 0:
-            return scores.order_by('score').first().score
+            return scores.order_by('score').last().score
         else:
             return 0
 

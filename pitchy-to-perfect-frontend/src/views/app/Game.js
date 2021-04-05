@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import * as Tone from 'tone'
 import GetRandomNote from './utils/GetRandomNote'
-import postHighScore from './utils/PostHighScore'
 import { Button, Header, Icon, Grid } from 'semantic-ui-react'
 import './game.css'
 
@@ -51,17 +50,19 @@ const Game = () => {
             user: userId
             // user: currentUser
         }
-
-        fetch('http://127.0.0.1:8000/api/v1/users/scores/', {
-            method: 'POST',
-            body: JSON.stringify(scoreData), 
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Token ${localStorage.getItem('token')}`           
-            }
-        })
-        .then(res => res.json())
-        .then(res => console.log(res))
+        if (currentScore > highScore) {
+            setHighScore(currentScore)
+            fetch('http://127.0.0.1:8000/api/v1/users/scores/', {
+                method: 'POST',
+                body: JSON.stringify(scoreData), 
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Token ${localStorage.getItem('token')}`           
+                }
+            })
+            .then(res => res.json())
+            .then(res => console.log(res))
+        }
     }
 
     const startGame = async () => {

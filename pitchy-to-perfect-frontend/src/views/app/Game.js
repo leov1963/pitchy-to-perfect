@@ -1,10 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import * as Tone from 'tone'
 import GetRandomNote from './utils/GetRandomNote'
+import postHighScore from './utils/PostHighScore'
 import { Button, Header, Icon, Grid } from 'semantic-ui-react'
 import './game.css'
 
 const Game = () => {
+    const [userId, setUserId] = useState(0)
     const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(true);
     const [isActive, setIsActive] = useState(false);
@@ -12,6 +14,7 @@ const Game = () => {
     const [wrongRandomNote, setWrongRandomNote] = useState("");
     const [isAnswerLeft, setIsAnswerLeft] = useState(false);
     const [currentScore, setCurrentScore] = useState(0);
+    const [highScore, setHighScore] = useState(0)
 
     const synth = new Tone.Synth().toDestination();
     const now = Tone.now();
@@ -25,15 +28,41 @@ const Game = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Token ${localStorage.getItem('token')}`
+                    
                 }
             })
             .then(res => res.json())
             .then(data => {
-                setUsername(data.username);
+                console.log(data)
+                setUserId(data.id)
+                setUsername(data.username)
+                setHighScore(data.highest_score)
                 setLoading(false);
             });
         }
     }, []);
+
+    const postHighScore = () => {
+        const date = new Date();
+        const currentDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+        let scoreData = {
+            score: currentScore,
+            date: currentDate,
+            user: userId
+            // user: currentUser
+        }
+
+        fetch('http://127.0.0.1:8000/api/v1/users/scores/', {
+            method: 'POST',
+            body: JSON.stringify(scoreData), 
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${localStorage.getItem('token')}`           
+            }
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+    }
 
     const startGame = async () => {
         setIsActive(!isActive);
@@ -98,6 +127,7 @@ const Game = () => {
         } else {
             console.log("Wrong Answer!")
             PlayGrossNote()
+            postHighScore()
             setTimeout( () => {
                 newRound()
                 setCurrentScore(currentScore - currentScore)
@@ -117,6 +147,7 @@ const Game = () => {
         } else {
             console.log("Wrong Answer!")
             PlayGrossNote()
+            postHighScore()
             setTimeout( () => {
                 newRound()
                 setCurrentScore(currentScore - currentScore)
@@ -132,6 +163,7 @@ const Game = () => {
                     <Grid.Column style={{ maxWidth: 450 }}>
                         <div className="game-container">
                             <Header as="h2" textAlign="center">Hello {username}!</Header>
+                            <div>high score: {highScore}</div>
                             <div>current score: {currentScore}</div>
                             <div className={`start-btn main-btns ${isActive ? "hidden" : ""}`}>
                             {/* <PlayNoteButton /> */}

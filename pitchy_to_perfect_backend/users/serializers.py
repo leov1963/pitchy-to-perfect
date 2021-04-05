@@ -4,7 +4,7 @@ class UserSerializer(ModelSerializer):
     highest_score = ReadOnlyField()
     class Meta:
         model = CustomUser
-        fields = ('email', 'username', 'highest_score')
+        fields = ('email', 'username', 'highest_score', 'id')
 
 class ScoreSerializer(ModelSerializer):
 

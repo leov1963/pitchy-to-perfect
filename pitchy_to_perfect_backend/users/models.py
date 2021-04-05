@@ -13,5 +13,7 @@ class CustomUser(AbstractUser):
 class HighScore(models.Model):
     date = models.DateField('score date')
     score = models.IntegerField()
-
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.score

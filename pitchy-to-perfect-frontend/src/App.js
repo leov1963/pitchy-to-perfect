@@ -4,6 +4,7 @@ import Login from './views/auth/Login';
 import Signup from './views/auth/Signup';
 import Logout from './views/auth/Logout'; 
 import Game from './views/app/Game'; 
+import ScoreBoard from './views/app/ScoreBoard'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
+          <Route path='/scoreboard' component={ScoreBoard} exact />
           <Route path='/game' component={Game} exact />
           <Route path='/login' component={Login} exact />
           <Route path='/signup' component={Signup} exact />

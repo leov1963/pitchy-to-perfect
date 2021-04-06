@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Button, Header, Icon, Grid } from 'semantic-ui-react'
+import { Button, Header, Icon, Grid, Segment } from 'semantic-ui-react'
+import './scoreboard.css'
 
 console.log("hello world")
 
@@ -23,26 +24,11 @@ const ScoreBoard = () => {
             console.log(data)
             });
     }, []);
-    
-    let orderedScores = [];
-    const topScores = () => {
-        const scores = []
-        for (let i = 0; i < data.length; i++) {
-            scores.push(data[i])
-        }
-        function sortScore(a, b) {
-            return b.score - a.score;
-        }
-        scores.sort(sortScore)
-        orderedScores = scores
-    } 
-    
-    
 
     const scoreElements = []
     const postScoreList = () => {
-        for (let score of orderedScores) {
-            scoreElements.push(<li key={score}>{"Score: " + score.score + " Date: " + score.date + " User: " + score.username}</li>)
+        for (let score of data) {
+            scoreElements.push(<Segment vertical><li className="user-scores" key={score}>Score: {score.score} <div>Date: {score.date}</div> <div>Username: {score.username}</div> </li></Segment>)
         }
     }
 
@@ -51,13 +37,12 @@ const ScoreBoard = () => {
         <div>
         {loading === false && (
             <Fragment>
-                {topScores()}
                 {postScoreList()}
-                {console.log(orderedScores)}
                 <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                     <Grid.Column style={{ maxWidth: 450 }}>
                         <div className="scores-container">
-                            <Header as="h2">High Scores:</Header>
+                            <br />
+                            <Header as="h2" className="scores-header">High Scores:</Header>
                             <ol>{scoreElements}</ol>
                         </div>                       
                     </Grid.Column>

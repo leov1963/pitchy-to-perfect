@@ -26,6 +26,12 @@ const Navbar = () => {
                         </div>
                     </Link>
                 </Menu.Item>
+                <Menu.Item as='a' color='black'>
+                            <Link to='/scoreboard'>
+                                <Icon name='list alternate outline' />
+                                score board
+                            </Link>
+                        </Menu.Item>
                 <Menu.Menu position='right'>
                     {isAuth === true ? (
                     <Fragment>

@@ -1,3 +1,5 @@
+
+
 """
 Django settings for pitchy_to_perfect_backend project.
 
@@ -11,6 +13,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +39,8 @@ REST_FRAMEWORK = {
 # TODO: CHANGE THIS YOU FOOL!!
 # ****************************************************************
 # ****************************************************************
-SECRET_KEY = 'k=0h)nsnga@^_h#dhu94ruop!j(ti)w&=&fqiq+$%=vrxx7-*v'
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

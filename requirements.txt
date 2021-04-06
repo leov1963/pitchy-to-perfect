@@ -2,4 +2,4 @@ django
 gunicorn
 django-heroku
 python-dotenv
-rest_framework
+djangorestframework

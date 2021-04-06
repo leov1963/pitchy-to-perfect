@@ -13,7 +13,8 @@ const Game = () => {
     const [wrongRandomNote, setWrongRandomNote] = useState("");
     const [isAnswerLeft, setIsAnswerLeft] = useState(false);
     const [currentScore, setCurrentScore] = useState(0);
-    const [highScore, setHighScore] = useState(0)
+    const [highScore, setHighScore] = useState(0);
+    const [rest, setRest] = useState(false);
 
     const synth = new Tone.Synth().toDestination();
     const now = Tone.now();
@@ -70,27 +71,14 @@ const Game = () => {
         setRandomNote(GetRandomNote())
         setWrongRandomNote(GetRandomNote())
         getRandomAnswers()
-        // wrongNoteCheck()
+        PlayDing()
     };
 
     const newRound = async () => {
         setRandomNote(GetRandomNote())
         setWrongRandomNote(GetRandomNote())
         getRandomAnswers()
-        // wrongNoteCheck()
     }
-
-    // Checks if wrong note is the same as random note and generates a new one if needed. not working
-    // const wrongNoteCheck = () => {
-    //     let wrongNote = wrongRandomNote
-    //     console.log("Checking wrong note")
-    //     console.log(randomNote, wrongRandomNote)
-    //     if (wrongNote === randomNote) {
-    //         console.log("*****double notes detected*****")
-    //     }
-    // }
-    // let randomNote = myNotes[Math.floor(Math.random()*myNotes.length)];
-    // let randomNote2 = myNotes[Math.floor(Math.random()*myNotes.length)];
 
     const PlayNote = () => {
         synth.triggerAttackRelease(randomNote, "8n");
@@ -100,6 +88,11 @@ const Game = () => {
     const PlayGrossNote = () => {
         console.log("GROSS!")
         synth.triggerAttackRelease("C#3", "8n")
+        
+    }
+
+    const PlayDing = () => {
+        synth.triggerAttackRelease("C#6", "5000n")
         
     }
 
@@ -120,7 +113,9 @@ const Game = () => {
         if (isAnswerLeft === true || wrongRandomNote === randomNote) {
             console.log("Correct Answer! now it should be green")
             PlayNote()
+            setRest(true)
             setTimeout( () => {
+                setRest(false)
                 newRound()
                 setCurrentScore(currentScore + 1)
             }, 1000)
@@ -129,7 +124,9 @@ const Game = () => {
             console.log("Wrong Answer!")
             PlayGrossNote()
             postHighScore()
+            setRest(true)
             setTimeout( () => {
+                setRest(false)
                 newRound()
                 setCurrentScore(currentScore - currentScore)
             }, 1000)
@@ -141,7 +138,9 @@ const Game = () => {
         if (isAnswerLeft === false || wrongRandomNote === randomNote) {
             console.log("Correct Answer!")
             PlayNote()
+            setRest(true)
             setTimeout( () => {
+                setRest(false)
                 newRound()
                 setCurrentScore(currentScore + 1)
             }, 1000)
@@ -149,9 +148,11 @@ const Game = () => {
             console.log("Wrong Answer!")
             PlayGrossNote()
             postHighScore()
+            setRest(true)
             setTimeout( () => {
                 newRound()
                 setCurrentScore(currentScore - currentScore)
+                setRest(false)
             }, 1000)
         }   
     }
@@ -166,37 +167,58 @@ const Game = () => {
                             <Header as="h2" textAlign="center">Hello {username}!</Header>
                             <div>high score: {highScore}</div>
                             <div>current score: {currentScore}</div>
+                            <br />
                             <div className={`start-btn main-btns ${isActive ? "hidden" : ""}`}>
-                            {/* <PlayNoteButton /> */}
                                 <Button size='huge' primary onClick={startGame} className="start-btn" id="start">Start!</Button>
                             </div>
                             <div className={`game-btns ${!isActive ? "hidden" : ""}`}>
                                 <div className='play-note-btn main-btns'>
                                     <Button size='huge' primary onClick={PlayNote}>
                                         <Icon name='volume up' size='large'/>
-                                        {/* <Icon name='itunes note' /> */}
+                                        <Icon name='itunes note' />
                                     </Button>
                                         <br />
                                     <div>*play note*</div>
                                 </div>
                                 <br />
-                                <div>
-                                    <div>Which note is this?</div>
-                                    <Button size='huge' secondary 
-                                        onClick={successCheckLeft} 
-                                        className='note-btn'
-                                        id="note-btn"
-                                        value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
-                                            {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
-                                    </Button>
-                                    <Button size='huge' secondary
-                                        onClick={successCheckRight}
-                                        className='note-btn' 
-                                        id="note-btn"
-                                        value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
-                                            {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
-                                    </Button>
-                                </div>
+                                {rest === true && (
+                                    <div>
+                                        <div>Which note is this?</div>
+                                        <Button disabled size='huge' secondary 
+                                            onClick={successCheckLeft} 
+                                            className='note-btn'
+                                            id="note-btn"
+                                            value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
+                                                {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
+                                        </Button>
+                                        <Button disabled size='huge' secondary
+                                            onClick={successCheckRight}
+                                            className='note-btn' 
+                                            id="note-btn"
+                                            value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
+                                                {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
+                                        </Button>
+                                    </div>
+                                )}
+                                {rest === false && (
+                                    <div>
+                                        <div>Which note is this?</div>
+                                        <Button size='huge' secondary 
+                                            onClick={successCheckLeft} 
+                                            className='note-btn'
+                                            id="note-btn"
+                                            value={`${isAnswerLeft ?randomNote : wrongRandomNote }`}>
+                                                {`${isAnswerLeft ?randomNote.slice(0,randomNote.length-1) : wrongRandomNote.slice(0,wrongRandomNote.length-1) }`}
+                                        </Button>
+                                        <Button size='huge' secondary
+                                            onClick={successCheckRight}
+                                            className='note-btn' 
+                                            id="note-btn"
+                                            value={`${isAnswerLeft ?wrongRandomNote : randomNote }`}>
+                                                {`${isAnswerLeft ?wrongRandomNote.slice(0,wrongRandomNote.length-1) : randomNote.slice(0,randomNote.length-1) }`}
+                                        </Button>
+                                    </div>
+                                )}
                             </div>
                         </div>                       
                     </Grid.Column>

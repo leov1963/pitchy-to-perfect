@@ -18,7 +18,6 @@ const ScoreBoard = () => {
         })
         .then(res => res.json())
         .then(data => {
-            // console.log(data)
             setData(data.high_scores)
             setLoading(false)
             console.log(data)

@@ -114,8 +114,8 @@ const LandingPage = () => {
                         <div className="scores-container">
                             <Header as="h2">Pitchy to Perfect</Header>
                             <Segment>
-                                <div>
-                                    Welcome to pitchy to perfect where you can train you ear to recognize all the notes of an octive!
+                                <div className="landing-info">
+                                    Welcome to pitchy to perfect where you can train your ear to recognize all the notes of an octive!
                                     <a className='sign-up-link' href='/signup'> Create an account</a>, press the start button, and start guessing! press the play note button to hear the note, and try to guess which of the two notes displayed it is.
                                     Be sure to pick the right note and good luck! 
                                 </div>

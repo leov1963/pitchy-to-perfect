@@ -1,1 +1,1 @@
-web: gunicorn pitchy_to_perfect_backend.wsgi --log-file -
+web: gunicorn pitchy-to-perfect.wsgi --log-file -

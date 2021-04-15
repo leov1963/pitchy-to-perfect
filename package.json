@@ -10,6 +10,6 @@
     "heroku-prebuild": "NODE_ENV=production cd pitchy-to-perfect-frontend/ && npm install && npm build && cd .."
   },
   "cacheDirectories": [
-    "frontend/node_modules"
+    "pitchy-to-perfect-frontend/node_modules"
   ]
 }
